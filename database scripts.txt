@@ -1,0 +1,143 @@
+
+--module 1 database script
+
+DROP TABLE Transaction;
+DROP TABLE PyUsers;
+DROP TABLE bank;
+
+CREATE TABLE PyUsers(
+	MobileNumber NUMBER(10) PRIMARY KEY,
+	Name VARCHAR2(20),
+	EmailId VARCHAR2(30) UNIQUE,
+	Password VARCHAR2(20),
+	Question VARCHAR2(30),
+	Answer VARCHAR2(20),
+	Balance NUMBER(10,2) DEFAULT 0);
+
+CREATE TABLE Bank(BANKNAME VARCHAR2(15));
+
+
+INSERT INTO PyUsers VALUES(9912459019,'Premnath','modadugup@gmail.com','Pp1!prem','Your favourite color','green',10000);
+INSERT INTO PyUsers VALUES(9040058469,'Mukesh','mukesh.ba@gmail.com','Mm1!mukesh','Your favourite color','red',2000);
+
+INSERT INTO BANK VALUES('ICICI');
+INSERT INTO BANK VALUES('SBI');
+INSERT INTO BANK VALUES('HDFC');
+INSERT INTO BANK VALUES('PNB');
+INSERT INTO BANK VALUES('AXIS');
+
+commit;
+
+--module 2 database script
+
+DROP TABLE MobileOperator;
+
+CREATE TABLE MobileOperator(
+    OperatorCode NUMBER(4) PRIMARY KEY,
+    OperatorName   VARCHAR2(50) NOT NULL
+    );
+INSERT INTO MobileOperator VALUES(9040,'Tata Docomo');
+INSERT INTO MobileOperator VALUES(9124,'Tata Docomo');
+INSERT INTO MobileOperator VALUES(9837,'BSNL');
+INSERT INTO MobileOperator VALUES(9937,'Airtel');
+INSERT INTO MobileOperator VALUES(8327,'Jio');
+
+commit;
+
+
+
+DROP TABLE DTHUser;
+CREATE TABLE DTHUser(
+    CustId NUMBER,
+    Operator VARCHAR2(50) NOT  NULL,
+    PackageType VARCHAR2(50) NOT NULL,
+    Amount NUMBER NOT NULL,
+    PRIMARY KEY(CustId,Operator)
+    );
+INSERT INTO DTHUser VALUES(1,'AIRTEL DIGITAL TV','Platinum HD Pack',700);
+INSERT INTO DTHUser VALUES(2,'TATA SKY','Platinum SD Pack',600);
+INSERT INTO DTHUser VALUES(3,'SUN DIRECT','Sports Dhamaka',380);
+INSERT INTO DTHUser VALUES(4,'SMP','South Special',400);
+INSERT INTO DTHUser VALUES(5,'BASE PACK','Platinum HD Pack',450);
+commit;
+
+
+--module 3 database script
+
+drop table Bookmovie;
+drop table ticketstatus;
+
+create table BookMovie (
+    Dateofmovie varchar2(20),
+    MovieName varchar2(100),
+    Language varchar2(20),
+    showtime1  varchar2(10),
+    showtime2 varchar2(10),
+    price integer,
+    no_of_seats1 integer default 100,
+    no_of_seats2 integer default 100,
+    no_of_booked1 integer default 0,
+    no_of_booked2 integer default 0,
+    constraint mo_dm_pk primary key(dateofmovie,moviename,language));
+
+INSERT INTO bookmovie values ('15-08-2017','The Mummy','English','10:00','13:30',260,default,default,default,default);
+INSERT INTO bookmovie values ('15-08-2017','The Minions','English','10:00','13:30',280,default,default,default,default);
+INSERT INTO bookmovie values ('15-08-2017','Lights Out','English','10:00','13:30',290,default,default,default,default);
+INSERT INTO bookmovie values ('15-08-2017','Baahubali','Telugu','10:00','13:30',300,default,default,default,default);
+INSERT INTO bookmovie values ('15-08-2017','Behen Hogi Teri','Hindi','10:00','13:30',200,default,default,default,default);
+INSERT INTO bookmovie values ('15-08-2017','3 Idiots','Hindi','10:00','13:30',200,default,default,default,default);
+INSERT INTO bookmovie values ('16-08-2017','The Minions','English','10:00','13:30',280,default,default,default,default);
+INSERT INTO bookmovie values ('16-08-2017','The Mummy','English','10:00','13:30',260,default,default,default,default);
+INSERT INTO bookmovie values ('16-08-2017','Behen Hogi Teri','Hindi','10:00','13:30',200,default,default,default,default);
+insert into bookmovie values ('16-08-2017','Baahubali','Telugu','10:00','13:30',300,default,default,default,default);
+insert into bookmovie values ('17-08-2017','The Mummy','English','10:00','13:30',260,default,default,default,default);
+insert into bookmovie values ('17-08-2017','Mom','Hindi','10:00','13:30',240,default,default,default,default);
+insert into bookmovie values ('17-08-2017','Lights Out','English','10:00','13:30',290,default,default,default,default);
+insert into bookmovie values ('18-08-2017','Mom','Hindi','10:00','13:30',240,default,default,default,default);
+insert into bookmovie values ('18-08-2017','Baahubali','Telugu','10:00','13:30',300,default,default,default,default);
+insert into bookmovie values ('18-08-2017','3 Idiots','Hindi','10:00','13:30',200,default,default,default,default);
+
+CREATE TABLE  Ticketstatus (
+	mobilenumber constraint ts_mn_fk references PyUsers(MobileNumber),
+	mdate varchar2(20),
+	ticketspurchased integer);
+	
+commit;
+
+
+
+--module 4 database script
+
+DROP TABLE Nearbyplaces;
+
+
+CREATE TABLE NearByPlaces(
+Name varchar2(20) NOT NULL,
+Address varchar2(30) NOT NULL,
+Pincode NUMBER NOT NULL,
+category Varchar2(20),
+CONSTRAINT n_a_p_pk PRIMARY key(Name,Address,Pincode));
+
+INSERT INTO Nearbyplaces VALUES ('Tonif','Hebbal Industrial Area','570015','Restaurant');
+INSERT INTO Nearbyplaces VALUES ('Punjabi tadka','Hebbal Electronics Area','570018','Restaurant');
+INSERT INTO Nearbyplaces VALUES ('Purple foods','Hebbal Industrial Area','570002','Restaurant');
+INSERT INTO Nearbyplaces VALUES ('Mall of Mysore','City bus stand','570001','Mall');
+INSERT INTO Nearbyplaces VALUES ('Loyal Worls','Suburban stop','570013','Super market');
+INSERT INTO Nearbyplaces VALUES ('Loyal Worls','Gandhi Circle','570024','Super market');
+INSERT INTO Nearbyplaces VALUES ('Loyal Worls','Suburban stop','570002','Super market');
+INSERT INTO Nearbyplaces VALUES ('Mall of Mysore','City bus stand','570012','Mall');
+INSERT INTO Nearbyplaces VALUES ('GMC Medical Center','Suburban bus stand','570021','Hospital');
+INSERT INTO Nearbyplaces VALUES ('Mall of Mysore','Hebbal Industrial Area','570024','Hospital');
+INSERT INTO Nearbyplaces VALUES ('Mall of Mysore','Electronics city','570002','Hospital');
+INSERT INTO Nearbyplaces VALUES ('City center','Gandhi circle','570001','Mall');
+INSERT INTO Nearbyplaces VALUES ('Hyper Mall','City bus stand','570012','Mall');
+
+commit;
+
+--module 5 database script
+
+
+CREATE TABLE Transaction(Transactionid number(10) primary key,mobilenumber number(10) references PyUsers(mobilenumber),
+dot DATE default SYSDATE,remarks varchar2(40),t_type char(4),amount number(10,2));
+
+commit;
